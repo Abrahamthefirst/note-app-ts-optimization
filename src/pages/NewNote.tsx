@@ -1,18 +1,15 @@
 import { Input } from '../components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Link } from 'react-router-dom';
 import { transformData } from '../lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import CreatableSelect from 'react-select/creatable';
@@ -20,6 +17,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { type MultiValue } from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { noteFormSchema, type NoteFormInputs } from '@/schemas/noteSchema';
 
 type Note = {
   id: string;
@@ -27,26 +25,14 @@ type Note = {
   body: string;
   tagIds: string[];
 };
-const tagSchema = z.object({
-  label: z.string(),
-  id: z.string(),
-});
-const FormSchema = z.object({
-  title: z.string().min(1, { message: 'title is required' }),
-  body: z.string().min(1, { message: 'body is required' }),
-  tags: z.array(tagSchema).optional(),
-});
-
-FormSchema.required();
 
 export function CreateNoteForm() {
   const [LSTags, setLSTags] = useLocalStorage<Tag[]>('tags', []);
   const [notes, setNotes] = useLocalStorage<Note[]>('notes', []);
   const navigate = useNavigate();
 
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<NoteFormInputs>({
+    resolver: zodResolver(noteFormSchema),
     defaultValues: {
       title: '',
       body: '',
@@ -54,7 +40,7 @@ export function CreateNoteForm() {
     },
   });
 
-  function onSubmit({ title, tags, body }: z.infer<typeof FormSchema>) {
+  function onSubmit({ title, tags, body }: NoteFormInputs) {
     let tagIds: string[];
     if (tags) {
       setLSTags((prevLSTags: Tag[]) => {
@@ -166,7 +152,11 @@ export function CreateNoteForm() {
           <Button type="submit" className="cursor-pointer">
             Submit
           </Button>
-          <Button className="cursor-pointer" type="button" onClick={() => navigate(-1)}>
+          <Button
+            className="cursor-pointer"
+            type="button"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </Button>
         </div>
