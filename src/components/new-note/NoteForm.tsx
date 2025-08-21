@@ -1,4 +1,4 @@
-import { Input } from '../components/ui/input';
+import { Input } from '../ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -10,25 +10,24 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { transformData } from '../lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import CreatableSelect from 'react-select/creatable';
+import { transformData } from '@/lib/utils';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { type MultiValue } from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import useTags from '@/features/tag/useTag';
+import {
+  useNotesQuery,
+  useCreateNoteMutation,
+} from '@/features/notes/hooks/useNotes';
 import { noteFormSchema, type NoteFormInputs } from '@/schemas/noteSchema';
 
-type Note = {
-  id: string;
-  title: string;
-  body: string;
-  tagIds: string[];
-};
-
-export function CreateNoteForm() {
-  const [LSTags, setLSTags] = useLocalStorage<Tag[]>('tags', []);
-  const [notes, setNotes] = useLocalStorage<Note[]>('notes', []);
+const CreateNoteForm = () => {
+  const { error, data: notes } = useNotesQuery();
+  const createNote = useCreateNoteMutation();
+  const { error: tagError, tags } = useTags('fetchAll');
   const navigate = useNavigate();
 
   const form = useForm<NoteFormInputs>({
@@ -41,30 +40,7 @@ export function CreateNoteForm() {
   });
 
   function onSubmit({ title, tags, body }: NoteFormInputs) {
-    let tagIds: string[];
-    if (tags) {
-      setLSTags((prevLSTags: Tag[]) => {
-        const existingLabelsMap = new Map<string, Tag>();
-
-        (prevLSTags || []).forEach((tag) => {
-          existingLabelsMap.set(tag.label.toLowerCase(), tag);
-        });
-
-        const newTagsToAdd = tags.filter((newTag) => {
-          return !existingLabelsMap.has(newTag.label.toLowerCase());
-        });
-
-        const updatedLSTags = [...(prevLSTags || []), ...newTagsToAdd];
-
-        return updatedLSTags;
-      });
-      tagIds = tags?.map((tag) => tag.id);
-    }
-
-    setNotes((prevNotes: Note[]) => [
-      ...prevNotes,
-      { title, body, tagIds: [...tagIds], id: uuidv4() },
-    ]);
+    createNote({ title, body, tags });
     navigate('/');
   }
 
@@ -122,7 +98,7 @@ export function CreateNoteForm() {
                       }));
                       field.onChange(transformedValues);
                     }}
-                    options={transformData(LSTags)}
+                    options={tags && transformData(tags)}
                   />
                 </FormControl>
                 <FormMessage />
@@ -163,15 +139,5 @@ export function CreateNoteForm() {
       </form>
     </Form>
   );
-}
-
-const NewNote = () => {
-  return (
-    <>
-      <h1 className="mb-4">New Note</h1>
-      <CreateNoteForm />
-    </>
-  );
 };
-
-export default NewNote;
+export default CreateNoteForm;

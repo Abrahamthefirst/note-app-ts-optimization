@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from 'react-router-dom';
 type Note = {
   id: string;
@@ -31,18 +30,25 @@ export function NoteCard({ title, body, tagIds, id }: Note) {
       <CardHeader>
         <CardTitle className="text-2xl font-medium">{title}</CardTitle>
         <CardDescription className="flex gap-2">
-          {noteTags.map((tag) => {
-            return <Button key={tag?.id} size="sm">{tag?.label}</Button>;
-          })}
+          {noteTags.length > 0 ? (
+            noteTags.map((tag) => {
+              return (
+                <Button key={tag?.id} size="sm">
+                  {tag?.label}
+                </Button>
+              );
+            })
+          ) : (
+            <p className="text-gray-500">no current tag</p>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="line-clamp-4">
-          {body} {" "}
-          Here is a text of 50 lines: The old lighthouse stood sentinel on the
-          craggy coast, its beacon sweeping the tumultuous waves. Each night,
-          its steady rhythm guided ships through the treacherous shoals and
-          hidden rocks. Inside, the keeper, an elderly man named Silas,
+          {body} Here is a text of 50 lines: The old lighthouse stood sentinel
+          on the craggy coast, its beacon sweeping the tumultuous waves. Each
+          night, its steady rhythm guided ships through the treacherous shoals
+          and hidden rocks. Inside, the keeper, an elderly man named Silas,
           meticulously maintained the intricate machinery. He knew every gear,
           every lens, every creak and groan of the ancient structure. For
           decades, the sea had been his only companion, its vastness both a
@@ -84,9 +90,28 @@ export function NoteCard({ title, body, tagIds, id }: Note) {
         </div>
         ...
         <Link to={`note/${id}`} className="text-green-400">
-          {' '}
-          read more{' '}
+          read more
         </Link>
+      </CardContent>
+    </Card>
+  );
+}
+
+export function SkeletonNoteCard() {
+  return (
+    
+    <Card className="max-w-full min-w-64">
+      <CardHeader>
+        <CardTitle className="w-full text-2xl font-medium">
+          <Skeleton className="h-[36px] w-full rounded-xl" />
+        </CardTitle>
+        <CardDescription className="my-4 flex w-full space-x-2">
+          <Skeleton className="h-10 w-full rounded-xl" />
+          <Skeleton className="h-10 w-full rounded-xl" />
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Skeleton className="h-32" />
       </CardContent>
     </Card>
   );

@@ -1,11 +1,9 @@
 import AnchorButton from '@/components/common/AnchorButton';
-import { useRef} from 'react';
 import EditTag from '@/components/Home/EditTag';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const Header = () => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
   return (
     <header className="my-4 flex justify-between">
       <span>Notes</span>
@@ -14,13 +12,15 @@ const Header = () => {
           Create
         </AnchorButton>
 
-        <Button className="cursor-pointer" onClick={() => dialogRef.current?.showModal()}>
-          Edit Tags
-        </Button>
-
-        <dialog className="backdrop:bg-amber-500" ref={dialogRef}>
-          <EditTag closeModal={() =>  dialogRef.current?.close()} />
-        </dialog>
+        <Dialog>
+          <DialogTrigger className="cursor-pointer rounded-md border-2 px-4 py-2">
+            Edit Tags
+          </DialogTrigger>
+          <DialogContent>
+            <DialogTitle>Edit profile</DialogTitle>
+            <EditTag />
+          </DialogContent>
+        </Dialog>
       </div>
     </header>
   );
