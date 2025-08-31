@@ -11,8 +11,9 @@ import { useAuth } from '@/context/AuthProvider';
 
 export default function DBSidebar() {
   const folders = [];
-  const { dispatch } = useAuth();
+  const { dispatch, state } = useAuth();
   const navigate = useNavigate();
+
   const items = [
     {
       title: 'Home',
@@ -47,7 +48,7 @@ export default function DBSidebar() {
   };
   return (
     <Sidebar>
-      <SidebarHeader className="font-playfair text-2xl">Abraham</SidebarHeader>
+      <SidebarHeader className="font-playfair text-2xl">{state.user?.username}</SidebarHeader>
       <SidebarContent>
         <GenericTree />
         <p onClick={logout}>logout</p>

@@ -3,13 +3,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import PasswordInput from '@/components/common/PasswordInput';
-import {
-  type LoginFormInput,
-  LoginFormSchema,
-} from '../schema/authSchema';
+import { type LoginFormInput, LoginFormSchema } from '../schema/auth.schema';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthProvider';
-import { login } from '@/api/auth';
+import { Link } from 'react-router-dom';
+import { login } from '@/features/auth/api/auth';
 import {
   Form,
   FormControl,
@@ -20,11 +18,10 @@ import {
 } from '@/components/ui/form';
 import { genericToast, errorToast } from '@/lib/toast/index.ts';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [pending, setPending] = useState(false);
   const emailField = useRef<HTMLInputElement>(null);
   const { dispatch } = useAuth();
 
@@ -41,9 +38,7 @@ const LoginForm = () => {
   });
 
   async function onSubmit({ email, password }: LoginFormInput) {
-    setPending(true);
     const { data: response, errMsg } = await login({ email, password });
-    setPending(false);
     if (errMsg) {
       errorToast(errMsg);
     }
@@ -68,7 +63,7 @@ const LoginForm = () => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 px-[clamp(.5rem,1rem+8vw,20rem)] text-black"
         >
-          <div className="flex w-full flex-col justify-between sm:flex-row sm:items-center">
+          <div className="flex w-full flex-col sm:flex-row sm:items-center">
             <FormField
               control={form.control}
               name="email"
@@ -101,8 +96,17 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
+          <div className="w-full text-left">
+            <Link to="/forgot-password" className="text-left text-sm underline">
+              Forgot Password?
+            </Link>
+          </div>
           <div className="flex gap-4">
-            <Button type="submit" className="cursor-pointer" disabled={pending}>
+            <Button
+              type="submit"
+              className="cursor-pointer"
+              disabled={form.formState.isSubmitting}
+            >
               Submit
             </Button>
           </div>

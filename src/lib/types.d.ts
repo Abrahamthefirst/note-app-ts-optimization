@@ -1,6 +1,9 @@
-type Tag = {
+type TagApiResponse = {
   id: string;
-  label: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
 };
 interface Filters {
   title: string;
@@ -12,6 +15,17 @@ type Note = {
   title: string;
   body: string;
   tagIds: string[];
+};
+
+type NoteApiResponse = {
+  body: string;
+  directoryId: string;
+  createdAt: string;
+  id: string;
+  status: true;
+  tags: TagApiResponse[];
+  title: string;
+  updatedAt: string;
 };
 
 type ToastInput = {

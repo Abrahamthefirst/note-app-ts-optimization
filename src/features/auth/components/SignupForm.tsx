@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthProvider';
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
-import { signup } from '@/api/auth';
+import { signup } from '@/features/auth/api/auth';
 import 'react-phone-input-2/lib/style.css';
 import {
   RegisterFormSchema,
   type RegisterFormInput,
-} from '@/features/auth/schema/authSchema';
+} from '@/features/auth/schema/auth.schema';
 import {
   Form,
   FormControl,

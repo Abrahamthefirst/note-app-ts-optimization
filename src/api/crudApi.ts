@@ -9,10 +9,10 @@ const crud = {
     params?: params
   ): Promise<ResourceType[]> => {
     try {
-      const { data } = await axios.get(resource, params);
+      const response = await axios.get(resource, params);
 
-      if (!data) return []
-      const resources = data as unknown as ResourceType[];
+      if (!response.data) return []
+      const resources = response.data as unknown as ResourceType[];
 
       return resources;
     } catch (err) {
@@ -21,7 +21,7 @@ const crud = {
     }
   },
 
-  createResource: async <ResourceType>(
+createResource: async <ResourceType>(
     url: string,
     data: any
   ): Promise<ResourceType> => {
@@ -54,6 +54,7 @@ const crud = {
   },
 
   deleteResourceById: async (url: string): Promise<string | null> => {
+    console.log(url, "This is the url")
     const response = await axios.delete(url);
     return response as unknown as string;
   },
