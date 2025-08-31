@@ -5,7 +5,7 @@ export default function DBLayout() {
   return (
     <SidebarProvider>
       <DBSidebar />
-      <main>
+      <main className="w-full">
         <SidebarTrigger />
         <Outlet />
       </main>

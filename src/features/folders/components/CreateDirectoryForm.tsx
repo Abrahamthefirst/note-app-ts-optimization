@@ -27,6 +27,7 @@ const CreateDirectoryForm = () => {
 
   async function onSubmit(formValues: CreateDirectoryInput) {
     mutate(formValues);
+    form.reset()
   }
 
   return (

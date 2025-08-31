@@ -1,9 +1,15 @@
 import axios from 'axios';
-import { refreshToken } from './auth';
+import { refreshToken } from '../features/auth/api/auth';
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
 });
+
+export const axiosDefault = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  withCredentials: true
+})
+
 
 instance.interceptors.request.use(
   (config) => {
@@ -12,7 +18,6 @@ instance.interceptors.request.use(
     const token = JSON.parse(tokenString ?? '');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log(config.headers.Authorization, "request interceptor")
     }
     return config;
   },
@@ -26,7 +31,8 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    console.log(error, 'interceptor error', error.response, "ERror resposne");
+
+    console.log(originalRequest, "origin")
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -34,7 +40,6 @@ instance.interceptors.response.use(
         const { data: token } = await refreshToken();
         localStorage.setItem('note-app:token', JSON.stringify(token));
         originalRequest.headers.Authorization = `Bearer ${token}`;
-        console.log(originalRequest.headers.Authorization, "Auth headers")
         return instance(originalRequest);
       } catch (err) {
         return Promise.reject(err);

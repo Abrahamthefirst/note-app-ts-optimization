@@ -4,7 +4,7 @@ import crud from '@/api/crudApi';
 export const useDirectories = () => {
   return useQuery({
     queryKey: ['directory'],
-    queryFn: () => crud.getResources('directories/me'),
+    queryFn: () => crud.getResources<DirectoriesApiResponse>('directories/me'),
   });
 };
 
@@ -12,6 +12,21 @@ export const useDirectory = (directoryId: string) => {
   return useQuery({
     queryKey: ['directory', directoryId],
     queryFn: () => crud.getResourceById(directoryId),
+  });
+};
+
+export const useDeleteDirectory = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (directoryId: string) => crud.deleteResourceById(`directories/${directoryId}`),
+    onSuccess: (response: any) => {
+      successToast(` Directory Deleted`);
+      queryClient.invalidateQueries({ queryKey: ['directory'] });
+    },
+    onError: (error: ApiError) => {
+      errorToast(error.response?.data?.message);
+    },
   });
 };
 
