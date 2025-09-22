@@ -5,42 +5,15 @@ import {
   SidebarHeader,
 } from '@/components/ui/sidebar';
 import GenericTree from '@/features/sidebar/DirectoryTreeList';
-import { Calendar, Home, Inbox, Search, Settings, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthProvider';
 
 export default function DBSidebar() {
-  const folders = [];
   const { dispatch, state } = useAuth();
   const navigate = useNavigate();
 
-  const items = [
-    {
-      title: 'Home',
-      url: '#',
-      icon: Home,
-    },
-    {
-      title: 'Inbox',
-      url: '#',
-      icon: Inbox,
-    },
-    {
-      title: 'Calendar',
-      url: '#',
-      icon: Calendar,
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: Search,
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings,
-    },
-  ];
+
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -58,4 +31,3 @@ export default function DBSidebar() {
   );
 }
 
-//  so we have a backend that sends a token in re

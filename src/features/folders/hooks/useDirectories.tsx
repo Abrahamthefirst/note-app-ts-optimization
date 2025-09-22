@@ -20,7 +20,7 @@ export const useDeleteDirectory = () => {
 
   return useMutation({
     mutationFn: (directoryId: string) => crud.deleteResourceById(`directories/${directoryId}`),
-    onSuccess: (response: any) => {
+    onSuccess: () => {
       successToast(` Directory Deleted`);
       queryClient.invalidateQueries({ queryKey: ['directory'] });
     },

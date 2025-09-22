@@ -20,7 +20,7 @@ import {
 
 const CreateNoteForm = () => {
   const { mutate, isPending: createNotePending } = useCreateNoteMutation();
-  const { isPending, isError, data } = useTags();
+  const {  data } = useTags();
   const tags = data as TagApiResponse[];
 
   const { directoryId } = useParams();
@@ -113,7 +113,7 @@ const CreateNoteForm = () => {
         />
 
         <div className="flex gap-4 my-8">
-          <Button type="submit" className="cursor-pointer" disabled={isPending}>
+          <Button type="submit" className="cursor-pointer" disabled={createNotePending}>
             Create Note
           </Button>
         </div>

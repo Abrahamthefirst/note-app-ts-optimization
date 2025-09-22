@@ -77,7 +77,7 @@ const SignupForm = () => {
     }
 
     if (response) {
-      genericToast(`Welcome, ${response.data?.username}`);
+      genericToast({message:`Welcome, ${response.data?.username}`});
       dispatch({
         type: 'LOGIN',
         payload: {
@@ -141,10 +141,10 @@ const SignupForm = () => {
                     onChange={(
                       phone,
                       country: { [key: string]: string },
-                      e,
                       formattedValue
                     ) => {
                       onChange(formattedValue);
+                      phone
                       country.countryCode &&
                         form.setValue('country_code', country?.countryCode);
                     }}

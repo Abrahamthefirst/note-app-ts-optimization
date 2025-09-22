@@ -1,6 +1,6 @@
 import AnchorButton from '@/components/common/AnchorButton';
-import EditTag from '@/components/Home/EditTag';
-import { Button } from '@/components/ui/button';
+// import EditTag from '@/components/Home/EditTag';
+// import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const Header = () => {
@@ -18,7 +18,7 @@ const Header = () => {
           </DialogTrigger>
           <DialogContent>
             <DialogTitle>Edit profile</DialogTitle>
-            <EditTag />
+            {/* <EditTag /> */}
           </DialogContent>
         </Dialog>
       </div>

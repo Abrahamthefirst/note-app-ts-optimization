@@ -11,7 +11,7 @@ const NoteList = () => {
 
   const { data, isLoading, isError } = useNotesInDirectory(directoryId!);
 
-  const { mutate, isSuccess, isError: deleteError } = useDeleteNoteMutation();
+  const { mutate } = useDeleteNoteMutation();
 
   const { searchTerm, setSearchTerm, filteredResources } = useFilterSearch(
     data,

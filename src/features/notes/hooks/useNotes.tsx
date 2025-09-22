@@ -4,7 +4,7 @@ import { successToast, errorToast } from '@/lib/toast';
 import { useMemo } from 'react';
 import type { CreateNoteInput } from '../schema/note.schema';
 
-const { getResources, createResource, getResourceById, deleteResourceById } = crud;
+const { getResources, createResource, deleteResourceById } = crud;
 
 export const useNotesByDirectory = (directoryId: string) => {
   return useQuery({
@@ -73,7 +73,7 @@ export const useDeleteNoteMutation = () => {
       console.log("This is my note id", noteId)
       return deleteResourceById(`notes/me/${noteId}`);
     },
-    onSuccess: (response: any) => {
+    onSuccess: () => {
       successToast(`Note Deleted`);
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },

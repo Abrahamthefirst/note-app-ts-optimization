@@ -44,7 +44,7 @@ const LoginForm = () => {
     }
 
     if (response) {
-      genericToast(`Welcome back, ${response.data?.username}`);
+      genericToast({message:` Welcome back, ${response.data?.username}`});
       dispatch({
         type: 'LOGIN',
         payload: {

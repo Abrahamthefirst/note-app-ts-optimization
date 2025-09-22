@@ -1,4 +1,3 @@
-import readingManImg from '../../../assets/images/reading-man.png';
 import { Button } from '@/components/ui/button';
 import {
   Form,

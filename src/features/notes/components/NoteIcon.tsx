@@ -1,5 +1,4 @@
-import directoryImg from '../../../assets/images/folder-invoices.png';
-import { Link } from 'react-router-dom';
+
  import noteIcon from "../../../assets/images/writing-notes-icon-black-note-on-sheet-of-diary-with-pen-as-an-element-of-agreement-and-editing-file-vector.jpg"
 
 const NoteIcon = ({

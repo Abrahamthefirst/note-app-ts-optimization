@@ -15,7 +15,7 @@ const ViewerDashboard = () => {
     data,
     'name'
   );
-  const { mutate, isSuccess, isError: deleteError } = useDeleteDirectory();
+  const { mutate } = useDeleteDirectory();
 
   const directories = filteredResources as unknown as DirectoriesApiResponse;
   if (isPending) return <>Loading</>;

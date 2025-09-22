@@ -7,7 +7,6 @@ import {
   SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import { ChevronDown } from 'lucide-react';
-import { useDirectories } from '../folders/hooks/useDirectories';
 import {
   Collapsible,
   CollapsibleContent,

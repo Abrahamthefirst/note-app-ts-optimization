@@ -2,7 +2,7 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import crud from '@/api/crudApi';
 import {type  CreateTagInput } from '../schema/tag.schema';
 
-const { getResources, createResource, getResourceById } = crud;
+const { getResources, createResource } = crud;
 
 export const useTags = () => {
   return useQuery({

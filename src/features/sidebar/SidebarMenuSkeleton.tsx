@@ -3,7 +3,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSkeleton,
 } from '@/components/ui/sidebar';
-function NavProjectsSkeleton({ length }: { length: number }) {
+export function NavProjectsSkeleton({ length }: { length: number }) {
   return (
     <SidebarMenu>
       {Array.from({ length }).map((_, index) => (
@@ -14,3 +14,4 @@ function NavProjectsSkeleton({ length }: { length: number }) {
     </SidebarMenu>
   );
 }
+

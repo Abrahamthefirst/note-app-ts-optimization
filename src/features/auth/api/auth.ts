@@ -1,6 +1,5 @@
-import { AxiosError, type Axios } from 'axios';
+import { AxiosError} from 'axios';
 import { type RegisterFormInput } from '@/features/auth/schema/auth.schema';
-import { jwtDecode } from 'jwt-decode';
 
 import axios, { axiosDefault } from '../../../api/axios';
 
