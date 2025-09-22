@@ -1,10 +1,4 @@
-interface ToastInput {
-  id: string;
-  message: string;
-  icon?: React.ReactNode;
-  timeout?: number;
-  style?: React.CSSProperties;
-}
+
 
 class ToastEmitter extends EventTarget {
   private static instance: ToastEmitter;

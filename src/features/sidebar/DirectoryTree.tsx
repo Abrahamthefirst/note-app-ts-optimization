@@ -42,7 +42,6 @@ const DirectoryTree = ({ directory }: { directory: DirectoryApiResponse }) => {
       icon: Settings,
     },
   ];
-  console.log(directory, 'This is the user directory');
   return (
     <Collapsible className="group/collapsible">
       <SidebarGroup className="rounded-md border">

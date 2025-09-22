@@ -6,11 +6,12 @@ export const toast = ({
   message,
   icon,
   timeout,
+  handleClick,
   style,
 }: Omit<ToastInput, 'id'>) => {
   const id = uuidv4();
 
-  const newToast: ToastInput = { id, message, icon, timeout, style };
+  const newToast: ToastInput = { id, message, icon, timeout, style, handleClick };
 
   toastEvent.addToast(newToast);
 
@@ -36,14 +37,24 @@ export const errorToast = (message: string) => {
   });
 };
 export const genericToast = (
-  message: string,
+  {
+  message,
+  icon,
+  timeout,
+  style,
+  handleClick,
+  }: {
+      message: string,
   icon?: React.ReactNode,
   timeout?: number,
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
+  handleClick?: () => void
+  }
 ) => {
   toast({
     message,
     icon,
+    handleClick,
     timeout,
     style,
   });

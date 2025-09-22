@@ -1,4 +1,4 @@
-import  { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import toastEvent from './ToastEmitter';
@@ -36,6 +36,7 @@ const ToastContainer = () => {
       );
     };
   }, []);
+
 
   const handleCloseToast = useCallback((id: string) => {
     toastEvent.removeToast(id);
@@ -75,7 +76,10 @@ const ToastContainer = () => {
             <Toast
               message={toastItem.message}
               icon={toastItem.icon}
-              close={() => handleCloseToast(toastItem.id)}
+              handleClick={() => {
+                toastItem.handleClick ? toastItem.handleClick() : '';
+                handleCloseToast(toastItem.id);
+              }}
               style={toastItem.style}
             />
           </motion.button>

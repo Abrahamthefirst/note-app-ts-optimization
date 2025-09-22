@@ -1,18 +1,18 @@
 const Toast = ({
   message,
   icon,
-  close,
+  handleClick,
   style,
 }: {
   message: string;
   icon?: React.ReactNode;
-  close: () => void;
+  handleClick: () => void;
   style?: React.CSSProperties;
 }) => {
   return (
     <div
       className={`relative cursor-pointer rounded-full border-2 border-white bg-black px-4 py-2 text-white shadow-lg transition-transform duration-700 ease-out`}
-      onClick={close}
+      onClick={handleClick}
       style={style}
     >
       <div className="relative">
@@ -26,4 +26,4 @@ const Toast = ({
     </div>
   );
 };
-export default Toast
+export default Toast;

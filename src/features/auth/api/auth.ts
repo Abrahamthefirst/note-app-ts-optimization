@@ -47,11 +47,14 @@ export const requestEmailVerificationLink = async (
   token: string
 ): Promise<ApiResponseType> => {
   try {
+    
+    console.log(token, "Does it reach here")
     const response = await axiosDefault.get(
       `${import.meta.env.VITE_API_BASE_URL}/auth/email/request_email_verification/${token}`
     );
     return { data: response.data?.message, errMsg: null };
   } catch (err) {
+    console.log(err, "this is the err")
     const axiosError = err as AxiosError<ApiErrorResponse>;
     const errMsg =
       axiosError.response?.data?.message ?? 'An unexpected error occurred.';

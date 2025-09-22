@@ -96,9 +96,12 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <div className="w-full text-left">
+          <div className="w-full text-left flex justify-between">
             <Link to="/forgot-password" className="text-left text-sm underline">
               Forgot Password?
+            </Link>
+             <Link to="/sign-up" className="text-left text-sm underline">
+              Create Account
             </Link>
           </div>
           <div className="flex gap-4">

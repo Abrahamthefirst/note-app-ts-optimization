@@ -33,6 +33,7 @@ type ToastInput = {
   message: string;
   icon?: React.ReactNode;
   timeout?: number;
+  handleClick?: () => void;
   style?: React.CSSProperties;
 };
 
