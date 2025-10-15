@@ -21,7 +21,7 @@ const ViewerDashboard = () => {
   if (isPending) return <>Loading</>;
   if (isError) return <>Error</>;
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-[#696969] h-full">
       <CreateDirectoryForm />
       <section className="grid w-full grid-cols-2 p-8 md:grid-cols-5">
         {directories.map((directoryData) => {

@@ -22,7 +22,7 @@ const NoteList = () => {
   if (isLoading) return <>Loading</>;
   if (isError) return <>Error</>;
   return (
-    <section className="w-full bg-white">
+    <section className="w-full  h-full bg-[#696969]">
       <section className="relative flex w-full p-8">
         {notes.map((note) => {
           return (

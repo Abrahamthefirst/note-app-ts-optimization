@@ -1,5 +1,4 @@
 
-
 class ToastEmitter extends EventTarget {
   private static instance: ToastEmitter;
 

@@ -25,7 +25,7 @@ const FilterSearch = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={`Search by ${searchField}`}
-            className="mx-0 rounded-full px-1 border-none bg-transparent px-1 text-black outline-none focus:border-none focus:shadow-none focus:ring-0 focus:ring-offset-0 focus:outline-none"
+            className="mx-0 rounded-full px-2 border-none bg-transparent p text-black outline-none focus:border-none focus:shadow-none focus:ring-0 focus:ring-offset-0 focus:outline-none"
           />
         </div>
         {path && (

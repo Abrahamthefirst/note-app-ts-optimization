@@ -30,22 +30,19 @@ const CreateDirectoryForm = () => {
   }
 
   return (
-    <Form {...form} >
+    <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex px-[clamp(.5rem,1rem+8vw,20rem)] text-black  "
+        className="flex px-[clamp(.5rem,1rem+8vw,20rem)] text-black"
       >
-        <div className="justify-between flex w-full sm:flex-row sm:items-center">
+        <div className="flex w-full justify-between bg-transparent sm:flex-row sm:items-center">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem className="flex w-full">
                 <FormControl>
-                  <Input
-                    {...field}
-                    className="border border-black text-white"
-                  />
+                  <Input {...field} className="border border-black" />
                 </FormControl>
                 <FormMessage className="text-left" />
               </FormItem>
@@ -53,7 +50,7 @@ const CreateDirectoryForm = () => {
           />
         </div>
 
-        <div className="mx-2 flex gap-4 my-2">
+        <div className="mx-2 my-2 flex gap-4">
           <Button type="submit" className="cursor-pointer" disabled={isPending}>
             Create Directory
           </Button>
